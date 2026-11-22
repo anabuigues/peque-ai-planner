@@ -1,0 +1,12 @@
+rules_version = '2';
+// Fase 0: sin subidas desde cliente. Las imágenes del catálogo las sube el servidor (Admin SDK).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /catalog/{allPaths=**} {
+      allow read: if request.auth != null;
+    }
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

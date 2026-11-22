@@ -1,0 +1,53 @@
+rules_version = '2';
+
+// Ver docs/specs/plataforma.md (tabla de permisos) y docs/specs/privacidad-seguridad.md.
+// El servidor usa el Admin SDK (no sujeto a reglas); estas reglas son defensa en profundidad
+// para cualquier acceso desde el cliente. Denegado por defecto.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && request.auth.token.admin == true; }
+    function isMember(householdId) {
+      return signedIn()
+        && request.auth.uid in get(/databases/$(database)/documents/households/$(householdId)).data.memberUids;
+    }
+
+    // Perfil propio
+    match /users/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+
+    // Hogar y todo lo que cuelga de él: solo sus miembros (el admin NO tiene acceso)
+    match /households/{householdId} {
+      allow read, update: if isMember(householdId);
+      allow create: if signedIn() && request.auth.uid in request.resource.data.memberUids;
+      allow delete: if isMember(householdId);
+
+      match /{sub=**} {
+        allow read, write: if isMember(householdId);
+      }
+    }
+
+    // Catálogo: lectura solo de lo publicado; escritura solo admin
+    match /activities/{id} {
+      allow read: if (signedIn() && resource.data.status == 'published') || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /plans/{id} {
+      allow read: if (signedIn() && resource.data.status == 'published') || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /cities/{id} {
+      allow read: if signedIn();
+      allow write: if isAdmin();
+    }
+
+    // Operación de datos: exclusivo del administrador (ADR-0007)
+    match /sources/{id} { allow read, write: if isAdmin(); }
+    match /sourceItems/{id} { allow read, write: if isAdmin(); }
+    match /ingestionRuns/{id} { allow read, write: if isAdmin(); }
+    match /aiCache/{id} { allow read, write: if isAdmin(); }
+    match /generationBatches/{id} { allow read, write: if isAdmin(); }
+  }
+}

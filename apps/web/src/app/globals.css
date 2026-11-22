@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+/* Modo oscuro por clase (.dark en <html>), ver docs/specs/diseno.md */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f2f3f7;
+  --surface: #ffffff;
+  --surface-2: #f7f8fb;
+  --foreground: #0b0b0f;
+  --muted: #6b6f80;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --border: #e4e6ee;
+  --ring: #a5b4fc;
+  --hero-from: #4f46e5;
+  --hero-via: #8b5cf6;
+  --hero-to: #ec4899;
+}
+
+.dark {
+  --background: #0b0b0f;
+  --surface: #17171c;
+  --surface-2: #1f1f26;
+  --foreground: #f5f5f7;
+  --muted: #9a9dac;
+  --primary: #7c74ff;
+  --primary-foreground: #0b0b0f;
+  --border: #2a2a32;
+  --ring: #4f46e5;
+  --hero-from: #3730a3;
+  --hero-via: #6d28d9;
+  --hero-to: #be185d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --radius-card: 24px;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-via) 55%, var(--hero-to) 100%);
+}
