@@ -1,6 +1,6 @@
 # ADR-0009: Cifrado de campo con Tink + Cloud KMS
 
-- **Estado**: Aceptado
+- **Estado**: Aceptado · Modificado por ADR-0013 (alcance del crypto-shredding)
 - **Fecha**: 2026-11-22
 - **Relacionado con**: ADR-0005, ADR-0011, `docs/specs/privacidad-seguridad.md`
 
