@@ -20,3 +20,7 @@ Formato MADR simplificado (`_plantilla.md`). Un ADR aceptado no se edita salvo e
 | [0014](0014-hogares-solo-desde-servidor.md) | Los datos del hogar solo se acceden desde el servidor | Aceptado | 2026-11-22 |
 | [0015](0015-varios-hogares-por-usuario.md) | Varios hogares por usuario | Aceptado | 2026-11-22 |
 | [0016](0016-ubicacion-fuera-madrid-municipio.md) | Ubicación fuera de Madrid por municipio | Aceptado | 2026-11-22 |
+| [0017](0017-validacion-automatica-enlaces.md) | Validación automática de enlaces de recursos | Aceptado | 2026-11-22 |
+| [0018](0018-generacion-por-lotes-y-deduplicacion.md) | Generación por lotes, deduplicación y paquete `catalog` | Aceptado · Modificado por 0019 | 2026-11-22 |
+| [0019](0019-catalogo-actividades-desde-web.md) | Catálogo de actividades desde webs, con fichas propias y atribución | Aceptado | 2026-11-22 |
+| [0020](0020-sugerencias-ia-bajo-demanda.md) | Sugerencias de IA bajo demanda para las familias | Aceptado | 2026-11-22 |

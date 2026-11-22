@@ -9,8 +9,8 @@ Una spec por módulo, escrita **antes** de implementarlo y actualizada si cambia
 | [Diseño](diseno.md) | 0 | Aprobada |
 | [Plataforma base](plataforma.md) | 0 | Implementada |
 | [Perfil](perfil.md) | 1 | Implementada |
-| Actividades (`actividades.md`) | 2 | Pendiente |
-| Ingesta de datos (`ingesta-datos.md`) | 2–3 | Pendiente |
+| [Actividades](actividades.md) | 2 | Aprobada |
+| [Carga de datos](ingesta-datos.md) | 2–3 | Aprobada (parte de actividades) |
 | Planes (`planes.md`) | 3 | Pendiente |
 | Planificación (`planificacion.md`) | 4 | Pendiente |
 | Despliegue GCP (`despliegue.md`) | 5 | Pendiente |

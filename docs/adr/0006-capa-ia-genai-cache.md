@@ -22,3 +22,6 @@ La IA genera actividades y extrae/enriquece planes desde newsletters, webs y pub
 - Repetir un job no consume tokens.
 - La caché crece con el tiempo; es barata en Firestore y sirve de auditoría.
 - Ningún código llama al SDK de Google directamente fuera de `@peque/ai`.
+
+## Errata (2026-11-22)
+`gemini-2.5-flash` ya no está disponible para cuentas nuevas de la API de Gemini. El modelo por defecto pasa a ser `gemini-3.8-flash` (el que recomienda la propia API), configurable con `AI_MODEL`. Como el modelo forma parte de la clave de caché, cambiarlo invalida la caché de forma natural.

@@ -1,7 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import type { AiProvider, ModelClient, ModelRequest, ModelResponse } from './types';
 
-export const DEFAULT_MODEL = 'gemini-2.5-flash';
+export const DEFAULT_MODEL = 'gemini-3.8-flash';
 
 class GoogleGenAiClient implements ModelClient {
   constructor(
