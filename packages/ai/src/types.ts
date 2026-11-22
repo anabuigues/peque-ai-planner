@@ -19,7 +19,27 @@ export interface ModelResponse {
 export interface ModelClient {
   readonly provider: AiProvider;
   readonly model: string;
+  readonly embeddingModel: string;
   generate(request: ModelRequest): Promise<ModelResponse>;
+  embed(text: string): Promise<number[]>;
+}
+
+/** Para qué se hace una llamada real al modelo (contabilidad de la cuota diaria). */
+export type CallPurpose = 'extract' | 'relevance' | 'embed' | 'generate' | 'onDemand' | 'other';
+
+/**
+ * Se invoca justo antes de cada llamada real (no en aciertos de caché).
+ * Puede lanzar QuotaExceededError para impedir la llamada (carga por días, docs/specs/ingesta-datos.md).
+ */
+export interface CallGuard {
+  beforeCall(purpose: CallPurpose): Promise<void>;
+}
+
+export class QuotaExceededError extends Error {
+  constructor(message = 'Se ha alcanzado la cuota diaria de la IA') {
+    super(message);
+    this.name = 'QuotaExceededError';
+  }
 }
 
 export interface AiCacheStore {

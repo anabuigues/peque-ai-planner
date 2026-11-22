@@ -25,3 +25,6 @@ La IA genera actividades y extrae/enriquece planes desde newsletters, webs y pub
 
 ## Errata (2026-11-22)
 `gemini-2.5-flash` ya no está disponible para cuentas nuevas de la API de Gemini. El modelo por defecto pasa a ser `gemini-3.8-flash` (el que recomienda la propia API), configurable con `AI_MODEL`. Como el modelo forma parte de la clave de caché, cambiarlo invalida la caché de forma natural.
+
+## Errata 2 (2026-11-22)
+En pruebas reales, `gemini-3.8-flash` devolvió repetidamente 503 (saturado) y rechazó esquemas con muchas restricciones. La capa añade: reintentos con espera ante errores temporales, un **modelo de reserva** (`AI_FALLBACK_MODEL`, por defecto `gemini-3.6-flash`) y el envío de un esquema simplificado al modelo, validando las restricciones con Zod después. La decisión del ADR no cambia.

@@ -3,7 +3,7 @@ import { EmptyState } from '@/components/ui/empty-state';
 import { ListItem } from '@/components/ui/list-item';
 import { QuickAction } from '@/components/ui/quick-action';
 import type { Tone } from '@/components/ui/tone';
-import { countPublishedActivities, listPublishedActivities } from '@/server/repos/activities';
+import { ideasForToday, searchActivities } from '@/server/repos/activities';
 import { requireAppContext } from '@/server/context';
 import { ACTIVITY_CATEGORIES, formatAge } from '@peque/shared';
 import { CalendarPlus, Compass, Shapes, Sparkles, Users } from 'lucide-react';
@@ -13,7 +13,12 @@ export const metadata = { title: 'Inicio' };
 
 export default async function HomePage() {
   const { user, children, household } = await requireAppContext();
-  const [count, activities] = await Promise.all([countPublishedActivities(), listPublishedActivities(5)]);
+  const [matching, activities] = await Promise.all([
+    searchActivities(children, { categories: [], noSpecialMaterials: false }),
+    ideasForToday(children),
+  ]);
+  const count = matching.length;
+
   const firstName = user.name.split(' ')[0];
   const names = children.map((c) => c.alias);
   const forKids =
@@ -59,6 +64,7 @@ export default async function HomePage() {
               return (
                 <ListItem
                   key={a.id}
+                  href={`/actividades/${a.id}`}
                   icon={Shapes}
                   tone={(category?.color ?? 'gray') as Tone}
                   title={a.title}

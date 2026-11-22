@@ -23,7 +23,7 @@ export default defineConfig({
         },
         test: {
           name: 'integration',
-          include: ['apps/web/src/**/*.int.test.ts'],
+          include: ['apps/web/src/**/*.int.test.ts', 'packages/*/src/**/*.int.test.ts'],
           environment: 'node',
           setupFiles: ['./apps/web/test/integration-setup.ts'],
           testTimeout: 30000,

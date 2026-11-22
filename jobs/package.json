@@ -6,12 +6,15 @@
   "scripts": {
     "seed": "tsx --env-file-if-exists=../.env.local src/seed.ts",
     "set-admin": "tsx --env-file-if-exists=../.env.local src/set-admin.ts",
-    "build:geo": "tsx src/geo/build-geo-data.ts"
+    "build:geo": "tsx src/geo/build-geo-data.ts",
+    "ingest:activities": "tsx --env-file-if-exists=../.env.local src/catalog-cli.ts ingest",
+    "generate:activities": "tsx --env-file-if-exists=../.env.local src/catalog-cli.ts generate"
   },
   "dependencies": {
     "@peque/ai": "*",
     "@peque/shared": "*",
-    "firebase-admin": "^14.5.1"
+    "firebase-admin": "^14.5.1",
+    "@peque/catalog": "*"
   },
   "devDependencies": {
     "tsx": "^4.23.15"

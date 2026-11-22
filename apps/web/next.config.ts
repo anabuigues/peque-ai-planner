@@ -11,7 +11,7 @@ const csp = [
   "img-src 'self' data: blob: https://lh3.googleusercontent.com https://firebasestorage.googleapis.com",
   "font-src 'self' data:",
   `connect-src 'self' https://*.googleapis.com https://*.firebaseio.com${isDev ? ' http://127.0.0.1:* http://localhost:* ws://localhost:*' : ''}`,
-  `frame-src 'self' https://*.firebaseapp.com https://accounts.google.com${isDev ? ' http://127.0.0.1:* http://localhost:*' : ''}`,
+  `frame-src 'self' https://www.youtube-nocookie.com https://*.firebaseapp.com https://accounts.google.com${isDev ? ' http://127.0.0.1:* http://localhost:*' : ''}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -28,7 +28,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@peque/shared'],
+  transpilePackages: ['@peque/shared', '@peque/ai', '@peque/catalog'],
   serverExternalPackages: ['firebase-admin'],
   poweredByHeader: false,
   // En desarrollo, permitir abrir la app tanto en localhost como en 127.0.0.1

@@ -3,7 +3,7 @@
  * Solo catálogo público. Los hogares sintéticos se añaden en la fase 1, cuando exista el cifrado de campo.
  */
 import { initAdmin } from './firebase';
-import { titleFingerprint } from './fingerprint';
+import { titleFingerprint } from '@peque/catalog';
 import { SEED_ACTIVITIES } from './seed-data';
 
 const { db } = initAdmin();
@@ -20,7 +20,8 @@ for (const { slug, ...content } of SEED_ACTIVITIES) {
   batch.set(db.collection('activities').doc(`seed-${slug}`), {
     ...content,
     status: 'published',
-    source: 'manual',
+    origin: 'manual',
+    attributions: [],
     fingerprint: titleFingerprint(content.title),
     createdAt: now,
     updatedAt: now,

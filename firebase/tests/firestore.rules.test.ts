@@ -85,6 +85,8 @@ describe('catálogo', () => {
 
 describe('operación de datos (solo admin, ADR-0007)', () => {
   it('una familia no ve fuentes ni la caché de IA', async () => {
+    await assertFails(getDoc(doc(user('ana'), 'linkChecks/l1')));
+    await assertFails(getDoc(doc(user('ana'), 'aiUsage/2026-11-22')));
     await assertFails(getDoc(doc(user('ana'), 'aiCache/k1')));
     await assertFails(getDoc(doc(user('ana'), 'sources/s1')));
     await assertFails(setDoc(doc(user('ana'), 'ingestionRuns/r1'), { job: 'x' }));

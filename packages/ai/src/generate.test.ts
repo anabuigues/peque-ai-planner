@@ -77,3 +77,52 @@ describe('cacheKey', () => {
     expect(c).toBe(d);
   });
 });
+
+describe('cuota y embeddings', () => {
+  it('el guardián solo se consulta cuando hay llamada real', async () => {
+    const { QuotaExceededError } = await import('./types');
+    const client = fakeModelClient(() => ({ titles: ['x'] }));
+    const cache = memoryCacheStore();
+    let calls = 0;
+    const guard = { beforeCall: async () => void calls++ };
+    const base = { task: 't', promptVersion: 'v1', schema: Schema, buildPrompt, client, cache, guard, input: { category: 'a' } };
+    await generateJson(base);
+    await generateJson(base);
+    expect(calls).toBe(1);
+    const blocked = { beforeCall: async () => { throw new QuotaExceededError(); } };
+    await expect(generateJson({ ...base, input: { category: 'b' }, guard: blocked })).rejects.toBeInstanceOf(QuotaExceededError);
+    expect(client.calls).toHaveLength(1);
+  });
+
+  it('cachea embeddings', async () => {
+    const { embedText } = await import('./generate');
+    const client = fakeModelClient(() => ({}));
+    const cache = memoryCacheStore();
+    const a = await embedText({ text: 'Trasvase de agua', client, cache });
+    const b = await embedText({ text: 'Trasvase de agua', client, cache });
+    expect(a.cached).toBe(false);
+    expect(b.cached).toBe(true);
+    expect(b.vector).toEqual(a.vector);
+    expect(client.embedCalls).toHaveLength(1);
+  });
+});
+
+describe('reintentos', () => {
+  it('reintenta errores temporales y no los de cuota', async () => {
+    const { withRetry } = await import('./client');
+    let n = 0;
+    const r = await withRetry(async () => {
+      if (n++ < 2) throw Object.assign(new Error('high demand'), { status: 503 });
+      return 'ok';
+    }, [1, 1, 1]);
+    expect(r).toBe('ok');
+    let m = 0;
+    await expect(
+      withRetry(async () => {
+        m++;
+        throw Object.assign(new Error('quota'), { status: 429 });
+      }, [1, 1, 1]),
+    ).rejects.toThrow();
+    expect(m).toBe(1);
+  });
+});

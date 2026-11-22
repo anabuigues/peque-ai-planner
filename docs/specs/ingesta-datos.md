@@ -46,7 +46,8 @@ ingestionRuns/{id}         job, sourceId, status (running|paused_quota|done|erro
 Para cubrir huecos (categorías o edades con pocas actividades), no como fuente principal:
 - **Lote** = categoría + número (por defecto 10) + franja opcional. Entrada: taxonomía y los títulos existentes de la categoría (también descartados) para no repetirlos.
 - Salida estructurada con pasos, consejos de seguridad, `youtubeSearchQuery` y hasta 3 `videoCandidates`.
-- Modelo `gemini-3.8-flash` (`AI_MODEL`), temperatura 0,8, `promptVersion` `activities.generate@1`.
+- Modelo `gemini-3.8-flash` (`AI_MODEL`) con reserva `gemini-3.6-flash` (`AI_FALLBACK_MODEL`) si el principal está saturado; temperatura 0,8, `promptVersion` `activities.generate@1`.
+- Al modelo se le envía un esquema JSON solo con la estructura (sin longitudes ni límites, que lo hacen demasiado complejo); las restricciones se aplican al recibir la respuesta, recortando lo que se pase de largo.
 - El panel muestra una **tabla de cobertura** (actividades publicadas por categoría × franja de edad) para ver dónde faltan.
 
 ```

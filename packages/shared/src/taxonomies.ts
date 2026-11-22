@@ -4,14 +4,14 @@
  */
 
 export const ACTIVITY_CATEGORIES = [
-  { id: 'vida-practica', label: 'Vida práctica', color: 'amber' },
-  { id: 'motricidad-gruesa', label: 'Motricidad gruesa', color: 'orange' },
-  { id: 'motricidad-fina', label: 'Motricidad fina', color: 'pink' },
-  { id: 'cognicion', label: 'Cognición', color: 'violet' },
-  { id: 'lenguaje', label: 'Lenguaje', color: 'blue' },
-  { id: 'sensorial', label: 'Sensorial', color: 'teal' },
-  { id: 'mesa-de-luz', label: 'Mesa de luz', color: 'yellow' },
-  { id: 'luz-negra', label: 'Luz negra', color: 'indigo' },
+  { id: 'vida-practica', label: 'Vida práctica', color: 'amber', description: 'Tareas cotidianas reales: verter, limpiar, cocinar, vestirse, cuidar plantas.' },
+  { id: 'motricidad-gruesa', label: 'Motricidad gruesa', color: 'orange', description: 'Movimientos con todo el cuerpo: gatear, saltar, equilibrio, circuitos.' },
+  { id: 'motricidad-fina', label: 'Motricidad fina', color: 'pink', description: 'Precisión de manos y dedos: pinzas, enhebrar, recortar, trasvases pequeños.' },
+  { id: 'cognicion', label: 'Cognición', color: 'violet', description: 'Clasificar, emparejar, secuencias, causa-efecto, números y lógica.' },
+  { id: 'lenguaje', label: 'Lenguaje', color: 'blue', description: 'Vocabulario, cuentos, canciones, conversación, primeras letras.' },
+  { id: 'sensorial', label: 'Sensorial', color: 'teal', description: 'Explorar texturas, sonidos, olores, sabores y temperaturas.' },
+  { id: 'mesa-de-luz', label: 'Mesa de luz', color: 'yellow', description: 'Actividades sobre una superficie iluminada desde abajo con materiales translúcidos.' },
+  { id: 'luz-negra', label: 'Luz negra', color: 'indigo', description: 'Actividades con luz ultravioleta y materiales fluorescentes en penumbra.' },
 ] as const;
 
 export type ActivityCategoryId = (typeof ACTIVITY_CATEGORIES)[number]['id'];

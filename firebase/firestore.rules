@@ -46,5 +46,7 @@ service cloud.firestore {
     match /ingestionRuns/{id} { allow read, write: if isAdmin(); }
     match /aiCache/{id} { allow read, write: if isAdmin(); }
     match /generationBatches/{id} { allow read, write: if isAdmin(); }
+    match /linkChecks/{id} { allow read, write: if isAdmin(); }
+    match /aiUsage/{id} { allow read, write: if isAdmin(); }
   }
 }

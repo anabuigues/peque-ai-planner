@@ -9,6 +9,8 @@ export const SEED_ACTIVITIES: (ActivityContent & { slug: string })[] = [
     categories: ['vida-practica', 'motricidad-fina'],
     age: { minMonths: 18, maxMonths: 48 },
     durationMinutes: 15,
+    specialMaterials: false,
+    youtubeSearchQuery: 'trasvase de agua montessori niños',
     materials: ['2 jarras pequeñas', 'bandeja', 'bayeta', 'agua con colorante (opcional)'],
     steps: [
       { order: 1, text: 'Coloca las dos jarras sobre la bandeja, una con un poco de agua.' },
@@ -25,6 +27,8 @@ export const SEED_ACTIVITIES: (ActivityContent & { slug: string })[] = [
     categories: ['motricidad-gruesa'],
     age: { minMonths: 12, maxMonths: 72 },
     durationMinutes: 30,
+    specialMaterials: false,
+    youtubeSearchQuery: 'circuito motricidad con cojines en casa',
     materials: ['cojines', 'mantas', 'sillas', 'cinta de carrocero'],
     steps: [
       { order: 1, text: 'Marca con cinta una línea de inicio y otra de meta.' },
@@ -41,6 +45,8 @@ export const SEED_ACTIVITIES: (ActivityContent & { slug: string })[] = [
     categories: ['motricidad-fina', 'cognicion'],
     age: { minMonths: 30, maxMonths: 72 },
     durationMinutes: 20,
+    specialMaterials: false,
+    youtubeSearchQuery: 'clasificar pompones con pinzas',
     materials: ['pompones de colores', 'pinzas de cocina pequeñas', 'cubitera o vasitos'],
     steps: [
       { order: 1, text: 'Pon los pompones mezclados en un bol.' },
@@ -57,6 +63,8 @@ export const SEED_ACTIVITIES: (ActivityContent & { slug: string })[] = [
     categories: ['sensorial'],
     age: { minMonths: 6, maxMonths: 18 },
     durationMinutes: 20,
+    specialMaterials: false,
+    youtubeSearchQuery: 'cesta de los tesoros bebé',
     materials: ['cesta de mimbre', 'objetos naturales y de casa seguros (madera, metal, tela, cepillo)'],
     steps: [
       { order: 1, text: 'Elige 10–15 objetos seguros y grandes, sin piezas sueltas.' },
@@ -73,6 +81,8 @@ export const SEED_ACTIVITIES: (ActivityContent & { slug: string })[] = [
     categories: ['lenguaje'],
     age: { minMonths: 24, maxMonths: 84 },
     durationMinutes: 15,
+    specialMaterials: false,
+    youtubeSearchQuery: 'cuento con objetos bolsa misteriosa',
     materials: ['bolsa de tela', '4–6 objetos o muñecos'],
     steps: [
       { order: 1, text: 'Mete los objetos en la bolsa sin que los vea.' },
@@ -89,6 +99,8 @@ export const SEED_ACTIVITIES: (ActivityContent & { slug: string })[] = [
     categories: ['mesa-de-luz', 'cognicion'],
     age: { minMonths: 24, maxMonths: 72 },
     durationMinutes: 20,
+    specialMaterials: true,
+    youtubeSearchQuery: 'mezcla de colores mesa de luz',
     materials: ['mesa o caja de luz', 'piezas translúcidas de colores primarios'],
     steps: [
       { order: 1, text: 'Apaga la luz de la habitación y enciende la mesa.' },
