@@ -13,6 +13,7 @@ Requisitos: Node 22 y JDK 21 (emuladores de Firebase; en macOS `brew install ope
 ```bash
 npm install
 cp .env.example .env.local     # y pon tu email en ADMIN_EMAILS
+npm run setup:keys             # claves locales de cifrado
 npm run emulators              # terminal 1 — UI de emuladores en http://localhost:4000
 npm run seed                   # terminal 2 — datos de ejemplo
 npm run dev                    # http://localhost:3000
@@ -28,4 +29,4 @@ En local el login con Google usa el emulador de Auth: aparece una ventana para c
 
 ## Estado
 
-Fase 0 (cimientos locales) completada. Próxima: Fase 1 — Mi perfil.
+Fases 0 (cimientos) y 1 (Mi perfil: hogares, peques, invitaciones, cifrado de campo) completadas. Próxima: Fase 2 — Actividades.

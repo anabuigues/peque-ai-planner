@@ -23,16 +23,19 @@ packages/shared/   Tipos, esquemas Zod y taxonomías compartidas
 packages/ai/       Capa de IA (Gemini API / Vertex) con caché persistente
 jobs/              Scripts de ingesta, generación y seed (CLI en local; Cloud Run Jobs en GCP)
 firebase/          Reglas, índices y configuración de emuladores
-docs/              specs/, adr/, legal/
+docs/              specs/, adr/, legal/ (borradores de política, RAT y EIPD)
 ```
 
 ## Comandos
 
 ```bash
 npm install
+npm run setup:keys     # Claves locales de cifrado (DATA_KEK, INVITE_HMAC_KEY) en .env.local
 npm run emulators      # Emuladores de Firebase (Auth, Firestore, Storage) con persistencia en .firebase-data/
 npm run dev            # Next.js en http://localhost:3000
 npm run seed           # Datos sintéticos en el emulador
-npm test               # Vitest en todos los paquetes
+npm test               # Tests unitarios
+npm run test:rules     # Reglas de Firestore (arranca su propio emulador)
+npm run test:integration  # Repositorios contra emuladores (Firestore + Auth)
 npm run lint && npm run typecheck
 ```

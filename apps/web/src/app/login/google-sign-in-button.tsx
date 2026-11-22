@@ -36,14 +36,14 @@ async function createSession(user: User, forceRefresh = false): Promise<void> {
   if (body.refreshToken && !forceRefresh) return createSession(user, true);
 }
 
-export function GoogleSignInButton() {
+export function GoogleSignInButton({ next = '/' }: { next?: string }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function finish(user: User) {
     await createSession(user);
-    router.replace('/');
+    router.replace(next);
     router.refresh();
   }
 

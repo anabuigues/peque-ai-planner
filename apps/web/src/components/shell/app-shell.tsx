@@ -1,12 +1,24 @@
 import { Avatar } from '@/components/ui/avatar';
 import type { SessionUser } from '@/server/session';
+import type { HouseholdSummary } from '@peque/shared';
+import { HouseholdSwitcher } from './household-switcher';
 import { Logo } from './logo';
 import { MobileMenu } from './mobile-menu';
 import { NavLinks } from './nav-links';
 import { SignOutButton } from './sign-out-button';
 import { ThemeToggle } from './theme-toggle';
 
-export function AppShell({ user, children }: { user: SessionUser; children: React.ReactNode }) {
+export function AppShell({
+  user,
+  households,
+  activeHouseholdId,
+  children,
+}: {
+  user: SessionUser;
+  households: HouseholdSummary[];
+  activeHouseholdId: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="min-h-dvh lg:flex">
       {/* Escritorio: barra lateral fija */}
@@ -15,6 +27,7 @@ export function AppShell({ user, children }: { user: SessionUser; children: Reac
           <div className="px-2">
             <Logo />
           </div>
+          <HouseholdSwitcher households={households} activeId={activeHouseholdId} />
           <NavLinks isAdmin={user.isAdmin} />
         </div>
         <div className="flex items-center gap-2 rounded-full bg-surface p-1.5 pr-2">
@@ -38,7 +51,12 @@ export function AppShell({ user, children }: { user: SessionUser; children: Reac
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-[1080px] flex-1 px-4 pb-16 pt-2 lg:px-8 lg:pt-6">{children}</main>
+      <main className="mx-auto w-full max-w-[1080px] flex-1 px-4 pb-16 pt-2 lg:px-8 lg:pt-6">
+        <div className="mb-4 lg:hidden">
+          <HouseholdSwitcher households={households} activeId={activeHouseholdId} />
+        </div>
+        {children}
+      </main>
     </div>
   );
 }

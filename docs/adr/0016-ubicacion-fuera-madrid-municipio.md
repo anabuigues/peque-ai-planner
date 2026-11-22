@@ -20,3 +20,6 @@ Opción 1. Lista estática de municipios de España (código INE, nombre, provin
 - Cualquier hogar de España puede tener ubicación sin enviar datos a terceros.
 - En municipios grandes distintos de Madrid la precisión es baja; si se añaden más ciudades al catálogo de planes, se generará su lista de barrios como en ADR-0012.
 - El catálogo de planes sigue siendo solo de Madrid en el MVP.
+
+## Errata (2026-11-22)
+El Nomenclátor del CNIG solo se distribuye en formatos `.mdb`/`.odb` mediante formulario. Los municipios se toman de la **Base de Datos de Líneas Límite del IGN (BDLJE)**, publicada con la misma licencia CC BY 4.0 en el conjunto `georef-spain-municipio` de Opendatasoft, con un punto interior por municipio. La decisión no cambia; solo la fuente concreta. Generador: `jobs/src/geo/build-geo-data.ts`.

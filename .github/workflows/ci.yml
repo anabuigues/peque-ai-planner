@@ -23,6 +23,7 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run test:rules
+      - run: npm run test:integration
       - run: npm run build
         env:
           NEXT_PUBLIC_FIREBASE_PROJECT_ID: demo-peque-plan

@@ -34,25 +34,35 @@ beforeEach(async () => {
     await setDoc(doc(db, 'activities/draft'), { status: 'draft', title: 'B' });
     await setDoc(doc(db, 'aiCache/k1'), { output: {} });
     await setDoc(doc(db, 'sources/s1'), { type: 'web' });
+    await setDoc(doc(db, 'invites/t1'), { householdId: 'h1' });
+    await setDoc(doc(db, 'users/ana'), { householdIds: ['h1'] });
   });
 });
 
 const user = (uid: string, admin = false) =>
   env.authenticatedContext(uid, admin ? { admin: true } : {}).firestore();
 
-describe('hogar', () => {
-  it('los miembros leen su hogar y sus hijos', async () => {
-    await assertSucceeds(getDoc(doc(user('ana'), 'households/h1')));
-    await assertSucceeds(getDoc(doc(user('luis'), 'households/h1/children/c1')));
+describe('hogar (solo servidor, ADR-0014)', () => {
+  it('ni siquiera los miembros acceden desde el cliente', async () => {
+    await assertFails(getDoc(doc(user('ana'), 'households/h1')));
+    await assertFails(getDoc(doc(user('luis'), 'households/h1/children/c1')));
+    await assertFails(setDoc(doc(user('ana'), 'households/h1/children/c2'), { alias: 'x' }));
   });
 
-  it('otro usuario no puede leer ni escribir el hogar', async () => {
+  it('otro usuario y el admin tampoco', async () => {
     await assertFails(getDoc(doc(user('eva'), 'households/h1')));
-    await assertFails(setDoc(doc(user('eva'), 'households/h1/children/c2'), { name: 'x' }));
+    await assertFails(getDoc(doc(user('admin1', true), 'households/h1/children/c1')));
   });
 
-  it('el admin no lee hogares ajenos', async () => {
-    await assertFails(getDoc(doc(user('admin1', true), 'households/h1/children/c1')));
+  it('invitaciones inaccesibles desde el cliente', async () => {
+    await assertFails(getDoc(doc(user('ana'), 'invites/t1')));
+    await assertFails(setDoc(doc(user('ana'), 'invites/t2'), { householdId: 'h1' }));
+  });
+
+  it('cada usuario lee su perfil pero no lo escribe', async () => {
+    await assertSucceeds(getDoc(doc(user('ana'), 'users/ana')));
+    await assertFails(getDoc(doc(user('eva'), 'users/ana')));
+    await assertFails(setDoc(doc(user('ana'), 'users/ana'), { householdIds: ['h9'] }));
   });
 
   it('sin sesión no se accede a nada', async () => {

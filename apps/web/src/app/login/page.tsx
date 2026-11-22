@@ -4,8 +4,13 @@ import { GoogleSignInButton } from './google-sign-in-button';
 
 export const metadata = { title: 'Entrar' };
 
-export default async function LoginPage() {
-  if (await getSessionUser()) redirect('/');
+function safeNext(next?: string): string {
+  return next && next.startsWith('/') && !next.startsWith('//') ? next : '/';
+}
+
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; cuenta?: string }> }) {
+  const { next, cuenta } = await searchParams;
+  if (await getSessionUser()) redirect(safeNext(next));
   return (
     <main className="grid min-h-dvh lg:grid-cols-2">
       <section className="hero-gradient flex flex-col justify-between p-8 text-white lg:p-12">
@@ -24,12 +29,15 @@ export default async function LoginPage() {
         <div className="w-full max-w-sm">
           <h2 className="text-2xl font-bold tracking-tight">Entra en Peque Plan</h2>
           <p className="mt-2 text-muted">Usa tu cuenta de Google. No publicamos nada en tu nombre.</p>
+          {cuenta === 'borrada' && (
+            <p className="mt-6 rounded-2xl bg-surface p-4 text-sm">Tu cuenta y tus datos se han borrado. ¡Gracias por probar Peque Plan!</p>
+          )}
           <div className="mt-8">
-            <GoogleSignInButton />
+            <GoogleSignInButton next={safeNext(next)} />
           </div>
           <p className="mt-6 text-xs text-muted">
-            Al continuar aceptas la política de privacidad. Los datos de tus hijos se guardan cifrados y
-            nunca se comparten.
+            Consulta la <a href="/privacidad" className="underline">política de privacidad</a>. Los datos de
+            tus peques se guardan cifrados y nunca se comparten.
           </p>
         </div>
       </section>

@@ -66,3 +66,18 @@ export const CHILD_INTERESTS = [
 ] as const;
 
 export type ChildInterest = (typeof CHILD_INTERESTS)[number];
+
+export const CHILD_INTEREST_LABELS: Record<ChildInterest, string> = {
+  animales: 'Animales',
+  arte: 'Arte y manualidades',
+  musica: 'Música',
+  deporte: 'Deporte',
+  naturaleza: 'Naturaleza',
+  ciencia: 'Ciencia',
+  construccion: 'Construcción',
+  cuentos: 'Cuentos',
+  teatro: 'Teatro y títeres',
+  cocina: 'Cocina',
+  vehiculos: 'Vehículos',
+  agua: 'Agua',
+};
