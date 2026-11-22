@@ -27,8 +27,9 @@
 | Mes/año de nacimiento | Menor | `children` | **Sí** | Consentimiento del progenitor |
 | Intereses del hijo | Menor | `children` | **Sí** | Consentimiento del progenitor |
 | Notas del hijo (sin salud) | Menor | `children` | **Sí** | Consentimiento del progenitor |
-| Dirección y coordenadas de casa | Hogar | `households` | **Sí** | Consentimiento |
-| Geohash aproximado (~1 km) | Hogar | `households` | No (minimizado) | Consentimiento |
+| Coordenadas de "usar mi ubicación" (opcional) | Hogar | `households` | **Sí** | Consentimiento |
+| Barrio y geohash aproximado (~1 km) | Hogar | `households` | No (minimizado) | Consentimiento |
+| Nombre del hogar | Hogar | `households` | **Sí** | Ejecución del contrato |
 | Email de invitado | Adulto invitado | `households/*/invites` | **Sí** + HMAC para búsqueda | Interés legítimo |
 | Calendario (qué plan y qué hijo) | Hogar/menor | `households/*/planner` | Ids de hijo en claro (seudónimos), notas cifradas | Ejecución del contrato |
 
@@ -36,8 +37,9 @@
 1. **En tránsito**: HTTPS obligatorio (TLS 1.2+, 1.3 preferido), HSTS, cookies `secure`/`httpOnly`/`sameSite=lax`.
 2. **En reposo (base)**: AES-256 por defecto de Google en Firestore, Storage y backups.
 3. **De campo (reforzado)**: AES-256-GCM, DEK de 256 bits por hogar envuelta por KEK en Cloud KMS (`europe-southwest1`). *Associated data* = ruta del documento + campo. Ver ADR-0009.
-4. **Crypto-shredding** al borrar un hogar.
+4. **Crypto-shredding** al borrar un hogar: los datos desaparecen de la base de datos al momento y de las copias en un máximo de 7 días (ADR-0013).
 5. **Local**: KEK de desarrollo en `.env.local`; solo datos sintéticos de familias.
+6. **Sin direcciones**: la ubicación es un barrio o, opcionalmente, la geolocalización del navegador (ADR-0012).
 
 ## 4. Control de acceso
 - Security Rules: un usuario solo lee/escribe su hogar; el catálogo publicado es de solo lectura; las colecciones de operación son solo de admin.
@@ -51,7 +53,7 @@
 
 ## 6. Derechos de los interesados
 - Acceso/portabilidad: "Exportar mis datos" (JSON descifrado) desde el perfil.
-- Supresión: "Borrar mi cuenta" → borra documentos, destruye DEK, elimina usuario de Auth (Google elimina de backups de Auth en ≤180 días).
+- Supresión: "Borrar mi cuenta" → borra documentos, destruye DEK, elimina usuario de Auth. Copias de Firestore: ≤7 días (ADR-0013); copias de Auth gestionadas por Google: ≤180 días.
 - Rectificación: edición desde el perfil.
 
 ## 7. Retención

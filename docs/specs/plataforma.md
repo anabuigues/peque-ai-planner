@@ -20,7 +20,7 @@ Dejar un esqueleto funcional en local sobre el que construir los módulos: monor
 5. Security Rules iniciales (deny by default + catálogo publicado + hogar + admin) con tests.
 6. `@peque/ai`: `generateJson` con caché `aiCache`, validación Zod y bloqueo de claves personales; tests con proveedor simulado.
 7. Taxonomías compartidas: categorías de actividad y franjas de edad.
-8. Seed: ciudad Madrid y 6 actividades publicadas escritas a mano. Los hogares sintéticos se añaden en la fase 1, cuando exista el cifrado de campo.
+8. Seed: ciudad Madrid y 6 actividades publicadas escritas a mano. Los hogares se crean desde el alta guiada (fase 1); los tests de integración usan un proyecto de emulador aparte.
 9. CI en GitHub Actions: lint, typecheck, tests unitarios y tests de reglas con emulador.
 10. Cabeceras de seguridad en Next.js.
 

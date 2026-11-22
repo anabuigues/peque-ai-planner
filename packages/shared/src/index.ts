@@ -4,3 +4,6 @@ export * from './schemas/common';
 export * from './schemas/activity';
 export * from './schemas/plan';
 export * from './schemas/ai';
+export * from './schemas/household';
+export * from './geo';
+export * from './data';

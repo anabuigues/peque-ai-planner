@@ -1,6 +1,6 @@
 # ADR-0005: Modelo de datos en Firestore con hogar compartido
 
-- **Estado**: Aceptado
+- **Estado**: Aceptado · Modificado por ADR-0015 (varios hogares por usuario)
 - **Fecha**: 2026-11-22
 - **Relacionado con**: ADR-0002, ADR-0009
 

@@ -20,7 +20,9 @@
     "test:rules": "scripts/with-java.sh firebase emulators:exec --project demo-peque-plan --only firestore \"vitest run --project rules\"",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit -p packages/shared && tsc --noEmit -p packages/ai && tsc --noEmit -p jobs && tsc --noEmit -p apps/web",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "setup:keys": "node scripts/setup-keys.mjs",
+    "test:integration": "scripts/with-java.sh firebase emulators:exec --project demo-peque-plan --only firestore,auth \"vitest run --project integration\""
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
