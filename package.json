@@ -1,0 +1,39 @@
+{
+  "name": "peque-plan",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "jobs"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "npm run dev -w @peque/web",
+    "build": "npm run build -w @peque/web",
+    "emulators": "scripts/with-java.sh firebase emulators:start --project demo-peque-plan --import=.firebase-data --export-on-exit=.firebase-data",
+    "seed": "npm run seed -w @peque/jobs",
+    "set-admin": "npm run set-admin -w @peque/jobs --",
+    "test": "vitest run --project unit",
+    "test:rules": "scripts/with-java.sh firebase emulators:exec --project demo-peque-plan --only firestore \"vitest run --project rules\"",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p packages/shared && tsc --noEmit -p packages/ai && tsc --noEmit -p jobs && tsc --noEmit -p apps/web",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@firebase/rules-unit-testing": "^6.0.0",
+    "@types/node": "^22.20.5",
+    "eslint": "^10.15.0",
+    "eslint-config-next": "^16.4.6",
+    "firebase": "^13.4.0",
+    "firebase-tools": "^15.37.0",
+    "globals": "^17.14.0",
+    "prettier": "^3.10.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.73.0",
+    "vitest": "^5.1.1"
+  }
+}

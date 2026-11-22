@@ -1,0 +1,16 @@
+{
+  "name": "@peque/jobs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "seed": "tsx --env-file-if-exists=../.env.local src/seed.ts",
+    "set-admin": "tsx --env-file-if-exists=../.env.local src/set-admin.ts"
+  },
+  "dependencies": {
+    "@peque/ai": "*",
+    "@peque/shared": "*",
+    "firebase-admin": "^14.5.1"
+  },
+  "devDependencies": { "tsx": "^4.23.15" }
+}
